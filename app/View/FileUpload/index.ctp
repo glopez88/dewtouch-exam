@@ -12,8 +12,21 @@
 	<div class="alert">
 		<h3>Import Form</h3>
 	</div>
+    
+    <?php if ($this->request->query('imported') == 1): ?>
+        <div class="alert alert-success">
+    		<p>File imported successfully.</p>
+    	</div>
+    <?php endif; ?>
+    
+    <?php if ($this->request->query('invalid') == 1): ?>
+        <div class="alert alert-danger">
+    		<p>Please upload a valid csv file.</p>
+    	</div>
+    <?php endif; ?>
+    
 <?php
-echo $this->Form->create('FileUpload');
+echo $this->Form->create(false, array('action' => '/import', 'type'=>'file', ));
 echo $this->Form->input('file', array('label' => 'File Upload', 'type' => 'file'));
 echo $this->Form->submit('Upload', array('class' => 'btn btn-primary'));
 echo $this->Form->end();
